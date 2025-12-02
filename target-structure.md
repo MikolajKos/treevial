@@ -1,49 +1,47 @@
-```bash
 treevial/
-├── CMakeLists.txt              # Główny plik konfiguracyjny CMake
-├── clang-toolchain.cmake       # Twój plik toolchain (dla Clanga na Windows)
-├── .gitignore                  # Ignorowanie build/, .vscode/, kluczy API
-├── README.md                   # Opis projektu
+├── CMakeLists.txt              # Main CMake configuration file
+├── clang-toolchain.cmake       # Toolchain file (Clang on Windows)
+├── .gitignore                  # Ignore build/, .vscode/, API keys
+├── README.md                   # Project description
 │
-├── external/                   # Zewnętrzne biblioteki (jeśli nie używasz FetchContent)
-│   └── (opcjonalnie, np. json.hpp, CLI11.hpp)
+├── external/                   # External libraries (if not using FetchContent)
+│   └── (optional, e.g., json.hpp, CLI11.hpp)
 │
-├── src/                        # Kod źródłowy aplikacji
-│   ├── main.cpp                # Punkt wejścia (tylko parsowanie CLI i uruchamianie logiki)
-│   ├── CMakeLists.txt          # Konfiguracja dla plików źródłowych
+├── src/                        # Application source code
+│   ├── main.cpp                # Entry point (CLI parsing and running the logic)
+│   ├── CMakeLists.txt          # Configuration for source files
 │   │
-│   ├── cli/                    # Obsługa wiersza poleceń
-│   │   ├── CliParser.hpp       # Definicja argumentów (CLI11)
-│   │   └── CliParser.cpp       # Logika walidacji argumentów
+│   ├── cli/                    # Command-line interface handling
+│   │   ├── CliParser.hpp       # Argument definitions (CLI11)
+│   │   └── CliParser.cpp       # Argument validation logic
 │   │
-│   ├── core/                   # Główna logika biznesowa
-│   │   ├── AppEngine.hpp       # "Mózg" programu, łączy moduły
-│   │   └── AppEngine.cpp       # Implementacja przepływu (init -> analyze -> ask AI)
+│   ├── core/                   # Main business logic
+│   │   ├── AppEngine.hpp       # Central module connecting subsystems
+│   │   └── AppEngine.cpp       # Execution flow (init -> analyze -> ask AI)
 │   │
-│   ├── analysis/               # Analiza kodu (libclang)
-│   │   ├── CompilationDb.hpp   # Parsowanie compile_commands.json
+│   ├── analysis/               # Code analysis (libclang)
+│   │   ├── CompilationDb.hpp   # Parsing compile_commands.json
 │   │   ├── CompilationDb.cpp
-│   │   ├── CodeAnalyzer.hpp    # Wrapper na libclang (diagnostyka, wizytator)
+│   │   ├── CodeAnalyzer.hpp    # libclang wrapper (diagnostics, visitor)
 │   │   ├── CodeAnalyzer.cpp
-│   │   ├── AstVisitor.hpp      # Twój wizytator (zbieranie zależności)
+│   │   ├── AstVisitor.hpp      # AST visitor (dependency collection)
 │   │   └── AstVisitor.cpp
 │   │
-│   ├── api/                    # Komunikacja z OpenAI
-│   │   ├── OpenAiClient.hpp    # Klient HTTP (cpr/curl) i obsługa endpointów
+│   ├── api/                    # Communication with OpenAI
+│   │   ├── OpenAiClient.hpp    # HTTP client (cpr/curl) and endpoint handling
 │   │   ├── OpenAiClient.cpp
-│   │   ├── PayloadBuilder.hpp  # Tworzenie JSON-a dla API (kontekst + prompt)
+│   │   ├── PayloadBuilder.hpp  # JSON construction for API requests
 │   │   └── PayloadBuilder.cpp
 │   │
-│   └── utils/                  # Funkcje pomocnicze
-│       ├── FileManager.hpp     # Odczyt plików, cache'owanie treści
+│   └── utils/                  # Utility functions
+│       ├── FileManager.hpp     # File reading and content caching
 │       ├── FileManager.cpp
-│       ├── PathUtils.hpp       # Normalizacja ścieżek
-│       └── StringUtils.hpp     # Pomocnicze operacje na stringach
+│       ├── PathUtils.hpp       # Path normalization
+│       └── StringUtils.hpp     # String helper operations
 │
-└── tests/                      # Testy (tak jak omawialiśmy)
+└── tests/                      # Test suite
     ├── CMakeLists.txt
-    ├── run_tests.py            # Twój skrypt testowy
-    └── cases/                  # Pliki .cpp do testowania
+    ├── run_tests.py            # Test runner script
+    └── cases/                  # .cpp files used for testing
         ├── basic_error.cpp
         └── basic_error.expected.txt
-```
