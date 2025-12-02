@@ -23,6 +23,8 @@ treevial/
 │   ├── analysis/               # Code analysis (libclang)
 │   │   ├── CompilationDb.hpp   # Parsing compile_commands.json
 │   │   ├── CompilationDb.cpp
+│   │   ├── CompilerProbe.hpp   # Read compiler paths and resources
+│   │   ├── CompilerProbe.cpp
 │   │   ├── CodeAnalyzer.hpp    # libclang wrapper (diagnostics, visitor)
 │   │   ├── CodeAnalyzer.cpp
 │   │   ├── AstVisitor.hpp      # AST visitor (dependency collection)
