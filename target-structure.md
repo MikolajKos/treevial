@@ -1,3 +1,4 @@
+```bash
 treevial/
 ├── CMakeLists.txt              # Główny plik konfiguracyjny CMake
 ├── clang-toolchain.cmake       # Twój plik toolchain (dla Clanga na Windows)
@@ -45,3 +46,4 @@ treevial/
     └── cases/                  # Pliki .cpp do testowania
         ├── basic_error.cpp
         └── basic_error.expected.txt
+```
