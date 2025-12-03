@@ -1,14 +1,15 @@
 #ifndef COMPILER_PROBE_HPP
 #define COMPILER_PROBE_HPP
 
+#include <string>
 #include <vector>
 #include <algorithm>
-//TEMPORARY CHECK
-#include <clang-c/Index.h>
+#include <stdio.h>
+#include <sstream>
 
 class CompilerProbe {
 public:
-  std::vector<std::string> get_SystemHeaderFlags();
+  std::vector<std::string> get_CompilerFlags();
 private:
   /**
   * @brief Normalizes a string by removing all whitespace characters.
