@@ -1,0 +1,11 @@
+# Creating static library for this module
+add_library(analysis_lib STATIC
+	CompilerProbe.cpp
+)
+
+# This module requires libclang
+target_link_libraries(analysis_lib PRIVATE ${LIBCLANG_LIBRARY})
+
+target_include_directories(analysis_lib PUBLIC
+	"${CMAKE_CURRENT_SOURCE_DIR}/.."
+)

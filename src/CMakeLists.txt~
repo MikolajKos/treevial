@@ -1,0 +1,10 @@
+# Add subcatalogs and (run CMakeLists.txt for each one)
+add_subdirectory(analysis)
+
+# Create executable
+add_executable(trev main.cpp)
+
+# Create connection between program and all its modules
+target_link_libraries(trev PRIVATE
+	analysis_lib
+)
