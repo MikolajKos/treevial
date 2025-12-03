@@ -1,50 +1,30 @@
 cmake_minimum_required(VERSION 3.20)
-project(Treevial VERSION 0.1.0 LANGUAGES CXX)
+project(treevial)
 
-# --- Global settings ---
-set(CMAKE_CXX_STANDARD 17) # Lub 20, zależnie od Twoich preferencji
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # Kluczowe dla Twojego narzędzia!
+set(CMAKE_CXX_STANDARD 20)
 
-# --- 1. Dependencies (FetchContent) ---
-include(FetchContent)
+# ======================================================================
+# LIBCLANG CONFIGURATION
+# ======================================================================
 
-# nlohmann/json
-FetchContent_Declare(
-  nlohmann_json
-  GIT_REPOSITORY https://github.com/nlohmann/json.git
-  GIT_TAG v3.11.3
-)
-FetchContent_MakeAvailable(nlohmann_json)
+find_package(LLVM REQUIRED CONFIG)
 
-# CLI11
-FetchContent_Declare(
-  CLI11
-  GIT_REPOSITORY https://github.com/CLIUtils/CLI11.git
-  GIT_TAG v2.3.2
-)
-FetchContent_MakeAvailable(CLI11)
+message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
+message(STATUS "LLVM Include Dir: ${LLVM_INCLUDE_DIRS}")
 
-# --- 2. LLVM / LibClang configuration ---
-find_package(LLVM REQUIRED clang)
+include_directories(${LLVM_INCLUDE_DIRS})
 
-# Fix for Windows LNK2019: manual .lib file search
-find_library(
-    LIBCLANG_LIBRARY
-    NAMES
-	libclang
-	clang
-	libclang-18
-        libclang-17
-        libclang-16
-        libclang-15
-    HINTS
-	${LLVM_LIBRARY_DIRS}
-	/usr/lib/x86_64-linux-gnu
-        /usr/lib/llvm-18/lib
-    REQUIRED
-)
-message(STATUS "LibClang found at: ${LIBCLANG_LIBRARY}")
+add_definitions(${LLVM_DEFINITIONS})
+
+find_library(LIBCLANG_LIBRARY
+	NAMES clang libclang
+	HINTS ${LLVM_LIBRARY_DIRS})
+
+if(NOT LIBCLANG_LIBRARY)
+    message(FATAL_ERROR "libclang library not found!")
+else()
+    message(STATUS "Found libclang: ${LIBCLANG_LIBRARY}")
+endif()
 
 # ======================================================================
 # DOXYGEN CONFIGURATION
@@ -76,6 +56,12 @@ endif (DOXYGEN_FOUND)
 
 # ======================================================================
 
-# --- 3. Go to source code ---
-add_subdirectory(src)
+# Executable declaration
+add_executable(trev src/main.cpp)
+
+find_package(nlohmann_json 3.2.0 REQUIRED)
+
+target_link_libraries(trev PRIVATE ${LIBCLANG_LIBRARY} nlohmann_json::nlohmann_json)
+
+# EOF
 
