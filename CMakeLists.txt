@@ -27,6 +27,34 @@ else()
 endif()
 
 # ======================================================================
+# DOXYGEN CONFIGURATION
+# ======================================================================
+
+find_package(Doxygen)
+
+if (DOXYGEN_FOUND)
+    message(STATUS "Doxygen executable found at: ${DOXYGEN_EXECUTABLE}")
+    
+    doxygen_add_docs(
+        doc 
+        "${CMAKE_SOURCE_DIR}/src" # Source directory to analyze
+        
+        COMMENT "Generating reference documentation for Treevial."
+        
+        # Internal Doxygen configuration settings
+        Doxyfile_SET 
+            PROJECT_NAME="Treevial Code Reference"
+            RECURSIVE=YES                      # Scan subdirectories
+            FILE_PATTERNS="*.cpp *.hpp"        # Files to include
+            EXCLUDE_PATTERNS="*test*"          # Ignore test files
+            OUTPUT_DIRECTORY="${CMAKE_BINARY_DIR}/docs" # Output location
+    )
+
+else (DOXYGEN_FOUND)
+    message(WARNING "Doxygen not found. Documentation target 'doc' will not be generated.")
+endif (DOXYGEN_FOUND)
+
+# ======================================================================
 
 # Executable declaration
 add_executable(trev src/main.cpp)
