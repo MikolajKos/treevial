@@ -1,1 +1,53 @@
+# ----------------------------------------------------------------------
+# Build Artifacts and Output Folders
+# ----------------------------------------------------------------------
+# Ignore the primary build directory created by CMake
 build/
+# Other common build/output directories
+out/
+bin/
+lib/
+
+# ----------------------------------------------------------------------
+# CMake Generated Files
+# ----------------------------------------------------------------------
+# Ignore the CMake cache file
+CMakeCache.txt
+# Ignore the directory containing temporary build files and intermediate code
+CMakeFiles/
+# Ignore the generated install script
+cmake_install.cmake
+# Ignore the generic Makefile or Ninja build files (if not using Ninja)
+Makefile
+*.ninja
+
+# ----------------------------------------------------------------------
+# Compilation Database (CRITICAL)
+# ----------------------------------------------------------------------
+# This file contains absolute paths from local system.
+compile_commands.json
+
+# ----------------------------------------------------------------------
+# IDE and Editor Specific Files
+# ----------------------------------------------------------------------
+
+# Visual Studio Code (Local settings and state)
+.vscode/
+
+# Visual Studio / Windows Development Files
+.vs/
+*.user
+*.sln
+*.vcxproj
+*.vcxproj.filters
+
+# Emacs (Backup and Auto-Save Files)
+# Ignore files ending with ~ (backup files, e.g., main.cpp~)
+*~
+# Ignore auto-save files starting and ending with # (e.g., #main.cpp#)
+\#*\#
+.\#*
+
+# Vim / Neovim (Swap files)
+*.swp
+*.swo
