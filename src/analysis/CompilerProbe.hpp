@@ -1,15 +1,21 @@
 #ifndef COMPILER_PROBE_HPP
 #define COMPILER_PROBE_HPP
 
+#include <algorithm>
+#include <array>
+#include <cstdio>
+#include <sstream>
+#include <cstdio>
 #include <string>
 #include <vector>
-#include <algorithm>
-#include <stdio.h>
-#include <sstream>
+#include <memory>
 
 class CompilerProbe {
+  std::string compiler_cmd_;
 public:
-  std::vector<std::string> get_CompilerFlags();
+  explicit CompilerProbe(std::string compiler = "/usr/bin/clang");
+  
+  std::vector<std::string> getSystemIncludes();
 private:
   /**
   * @brief Normalizes a string by removing all whitespace characters.
@@ -22,7 +28,9 @@ private:
   * in-place modification and subsequent return.
   * @return std::string The normalized string without any whitespace.
   */
-  std::string normalize_string(std::string s);
+  std::string normalizeString(std::string s);
+
+  std::string exec(const std::string& cmd);
 };
 
 #endif
