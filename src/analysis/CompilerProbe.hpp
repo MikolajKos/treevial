@@ -3,12 +3,13 @@
 
 #include <algorithm>
 #include <array>
+#include <core/Errors.hpp>
 #include <cstdio>
+#include <cstdio>
+#include <memory>
 #include <sstream>
-#include <cstdio>
 #include <string>
 #include <vector>
-#include <memory>
 
 class CompilerProbe {
   std::string compiler_cmd_;
@@ -16,6 +17,7 @@ public:
   explicit CompilerProbe(std::string compiler = "/usr/bin/clang");
   
   std::vector<std::string> getSystemIncludes();
+  std::string getResourceDir();
 private:
   /**
   * @brief Normalizes a string by removing all whitespace characters.
@@ -28,7 +30,7 @@ private:
   * in-place modification and subsequent return.
   * @return std::string The normalized string without any whitespace.
   */
-  std::string normalizeString(std::string s);
+  void normalizeString(std::string& s);
 
   std::string exec(const std::string& cmd);
 };
