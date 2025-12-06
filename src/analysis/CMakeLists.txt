@@ -1,6 +1,7 @@
 # --- 1. Creating static library for this module ---
 add_library(analysis_lib STATIC
 	CompilerProbe.cpp
+	CompilationDb.cpp
 )
 
 # --- 2. Were headers can be found ---
@@ -11,6 +12,7 @@ target_include_directories(analysis_lib PUBLIC
 # --- 3. This module requires libclang ---
 target_link_libraries(analysis_lib PRIVATE
 	${LIBCLANG_LIBRARY}
+	nlohmann_json::nlohmann_json
 )
 
 # --- Add LLVM header catalogs (for clang-c/Index.h) ---
