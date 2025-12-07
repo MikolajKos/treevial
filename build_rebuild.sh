@@ -1,3 +1,6 @@
 rm -rf build
 mkdir build
-cd build
+
+if [ -d ./build ]; then
+    cd ./build
+fi
